@@ -37,7 +37,7 @@
             this.label_endscore.BackColor = System.Drawing.Color.Transparent;
             this.label_endscore.Font = new System.Drawing.Font("MV Boli", 48F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_endscore.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_endscore.Location = new System.Drawing.Point(157, 156);
+            this.label_endscore.Location = new System.Drawing.Point(41, 151);
             this.label_endscore.Name = "label_endscore";
             this.label_endscore.Size = new System.Drawing.Size(97, 85);
             this.label_endscore.TabIndex = 2;

@@ -17,18 +17,16 @@ namespace MatheQuiz.BackEnd.Services
     public class MainService
     {// global variable
         private CancellationTokenSource currentCancellationTokenSource;
-        private int inputInt = 0, score = 0, progressBarValue = 0, counter = 0;
+        private int inputInt = 0, score = 0, progressBarValue = 0, counter = 0, ProgressBarMinValue = 0, ProgresbarMaxValue = 5010;
         private Endscreen endscreenForm;
         private Aufgabe aufgabeForm;
         private StartMenu startForm;
         private Random Random = new Random();
         private ServiceCheckInput checkInput = new ServiceCheckInput();
+        private Entities entities = null;
+        private Operations val;
 
-        public Entities entities = null;
-        public Operations val;
-        public int ProgressBarMinValue = 0, ProgresbarMaxValue = 5010;
-
-        public List<Type> TypeList = new List<Type>()
+        private List<Type> TypeList = new List<Type>()
         {
              typeof(Add),
 
@@ -42,7 +40,11 @@ namespace MatheQuiz.BackEnd.Services
         /// </summary>
         public void Ini()
         {
-            startForm = new StartMenu(this);
+            if (startForm == null)
+            {
+                startForm = new StartMenu(this);
+            }
+
             startForm.Show();
             score = 0;
             counter = 0;
@@ -54,7 +56,7 @@ namespace MatheQuiz.BackEnd.Services
         public void ShowTaskForm()
         {
             startForm.Hide();
-            aufgabeForm = new Aufgabe(this);
+            aufgabeForm = new Aufgabe(this, ProgressBarMinValue, ProgresbarMaxValue);
             aufgabeForm.Show();
             GetNewExerciseAsync();
         }
@@ -68,6 +70,7 @@ namespace MatheQuiz.BackEnd.Services
             progressBarValue = 0;
             aufgabeForm.Hide();
             endscreenForm = new Endscreen(this);
+            DisplayEndScore();
             endscreenForm.Show();
         }
 
@@ -156,32 +159,35 @@ namespace MatheQuiz.BackEnd.Services
         /// <param name="str"></param>
         public void testInputText(string str)
         {
-            try
+            checked
             {
-                inputInt = Convert.ToInt32(str);
-                bool verdict = false;
-
-                verdict = PassInput(inputInt);
-
-                if (verdict)
+                try
                 {
-                    CancelTask();
+                    inputInt = Convert.ToInt32(str);
+                    bool verdict = false;
 
-                    score++;
+                    verdict = PassInput(inputInt);
 
-                    UpdateScore();
-                    GetNewExerciseAsync();
+                    if (verdict)
+                    {
+                        CancelTask();
+
+                        score++;
+
+                        UpdateScore();
+                        GetNewExerciseAsync();
+                    }
+                    else
+                    {
+                        CancelTask();
+
+                        GetNewExerciseAsync();
+                    }
                 }
-                else
+                catch (FormatException)
                 {
-                    CancelTask();
-
-                    GetNewExerciseAsync();
+                    return;
                 }
-            }
-            catch (FormatException)
-            {
-                return;
             }
         }
 
@@ -201,9 +207,15 @@ namespace MatheQuiz.BackEnd.Services
         /// returns end state for score in a string
         /// </summary>
         /// <returns>String</returns>
-        public string DisplayEndScore()
+        public void DisplayEndScore()
         {
-            return $"Dein Score ist {score}/10";
+            endscreenForm.UpdateScoreText(score);
+        }
+
+        public void StopCurrentTask()
+        {
+            CancelTask();
+            Ini();
         }
 
         /// <summary>

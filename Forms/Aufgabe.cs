@@ -23,13 +23,13 @@ namespace MatheQuiz.Forms
     {
         private MainService mainServiceInst;
 
-        public Aufgabe(MainService mainService)
+        public Aufgabe(MainService mainService, int progressBarMinValue, int progresbarMaxValue)
         {
             mainServiceInst = mainService;
             KeyPreview = true;
             InitializeComponent();
-            prg_bar.Maximum = mainService.ProgresbarMaxValue;
-            prg_bar.Minimum = mainService.ProgressBarMinValue;
+            prg_bar.Maximum = progresbarMaxValue;
+            prg_bar.Minimum = progressBarMinValue;
         }
 
         public void UpdateUI(DispalyEntities entities)
@@ -56,7 +56,7 @@ namespace MatheQuiz.Forms
 
         private void Aufgabe_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainServiceInst.CloseProgram();
+            mainServiceInst.StopCurrentTask();
         }
     }
 }

@@ -22,7 +22,11 @@ namespace MatheQuiz.Forms
             mainServiceInst = mainService;
 
             InitializeComponent();
-            label_endscore.Text = mainService.DisplayEndScore();
+        }
+
+        public void UpdateScoreText(int score)
+        {
+            label_endscore.Text = $"Du hast {score} aus 10 richtig";
         }
 
         private void Endscreen_Load(object sender, EventArgs e)

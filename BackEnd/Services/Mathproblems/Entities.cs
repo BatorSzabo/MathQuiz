@@ -10,7 +10,6 @@ namespace MatheQuiz.BackEnd.Services.Mathproblems
     {
         public int FirstNumber { get; set; }
         public int SecondNumber { get; set; }
-        public char Symbol { get; set; }
-        public Type Type { get; set; }
+        public Operations op { get; set; }
     }
 }

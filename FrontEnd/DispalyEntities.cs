@@ -13,5 +13,6 @@ namespace MatheQuiz.FrontEnd
         public string FirstNum = null;
         public string SecondNum = null;
         public string Symbol = null;
+        public int ProgresBarValue = 0;
     }
 }

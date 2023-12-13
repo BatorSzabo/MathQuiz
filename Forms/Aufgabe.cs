@@ -21,107 +21,42 @@ namespace MatheQuiz.Forms
 {
     public partial class Aufgabe : Form
     {
-        private MainService mainService = new MainService();
-        private ServiceCheckInput serviceCheckInput = new ServiceCheckInput();
-        private DispalyEntities DisplayEntity = new DispalyEntities();
+        private MainService mainServiceInst;
 
-        private int inputInt = 0;
-        private int score = 0;
-        private int counter = 0;
-
-        private CancellationTokenSource currentCancellationTokenSource;
-
-        public Aufgabe()
+        public Aufgabe(MainService mainService)
         {
+            mainServiceInst = mainService;
             KeyPreview = true;
             InitializeComponent();
-            GetNewExercise();
+            prg_bar.Maximum = mainService.ProgresbarMaxValue;
+            prg_bar.Minimum = mainService.ProgressBarMinValue;
         }
 
-        private void UpdateUI()
+        public void UpdateUI(DispalyEntities entities)
         {
-            label_score.Text = $"Score : {score}";
+            label_first_value.Text = entities.FirstNum.ToString();
+            label_mathsymbol.Text = entities.Symbol.ToString();
+            label_second_value.Text = entities.SecondNum.ToString();
+            prg_bar.Value = entities.ProgresBarValue;
         }
 
-        private async void GetNewExercise()
+        public void UpdateScore(string score)
         {
-            counter++;
-            if (counter > 10)
-            {
-                OpenEndScreen();
-                this.Hide();
-                return;
-            }
-            prg_bar.Value = 0;
-            DisplayEntity = mainService.CreateNewProblem();
-            label_first_value.Text = DisplayEntity.FirstNum;
-            label_mathsymbol.Text = DisplayEntity.Symbol;
-            label_second_value.Text = DisplayEntity.SecondNum;
-            prg_bar.Maximum = 5010;
-            prg_bar.Minimum = 0;
-            currentCancellationTokenSource = new CancellationTokenSource();
-            CancellationToken ct = currentCancellationTokenSource.Token;
-            for (int i = 0; i < 500; i++)
-            {
-                if (ct.IsCancellationRequested)
-                {
-                    return;
-                }
-                int v = prg_bar.Value;
-                prg_bar.Value += 10;
-                await Task.Delay(10);
-            }
-
-            GetNewExercise();
+            label_score.Text = score.ToString();
         }
 
         private void txt_input_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (int)Keys.Enter)
             {
-                try
-                {
-                    inputInt = Convert.ToInt32(txt_input.Text);
-                    bool verdict = false;
-
-                    verdict = mainService.passInput(inputInt);
-
-                    if (verdict)
-                    {
-                        CancelTask();
-
-                        score++;
-                        txt_input.Text = null;
-                        UpdateUI();
-                        GetNewExercise();
-                    }
-                    else
-                    {
-                        CancelTask();
-                        txt_input.Text = null;
-
-                        GetNewExercise();
-                    }
-                }
-                catch (FormatException)
-                {
-                    return;
-                }
+                mainServiceInst.testInputText(txt_input.Text);
+                txt_input.Text = null;
             }
         }
 
-        private void CancelTask()
+        private void Aufgabe_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (currentCancellationTokenSource != null)
-            {
-                currentCancellationTokenSource.Cancel();
-            }
-        }
-
-        private void OpenEndScreen()
-        {
-            Endscreen endscreen = new Endscreen(score);
-            endscreen.Show();
+            mainServiceInst.CloseProgram();
         }
     }
 }

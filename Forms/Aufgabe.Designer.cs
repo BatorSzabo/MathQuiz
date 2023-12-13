@@ -125,6 +125,7 @@ namespace MatheQuiz.Forms
             this.Controls.Add(this.label_first_value);
             this.Name = "Aufgabe";
             this.Text = "Aufgabe";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Aufgabe_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

@@ -8,19 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MatheQuiz;
+using MatheQuiz.BackEnd.Services;
 using MatheQuiz.Forms;
 
 namespace MatheQuiz.Forms
 {
     public partial class Endscreen : Form
     {
-        private int Endscore;
+        private MainService mainServiceInst;
 
-        public Endscreen(int score)
+        public Endscreen(MainService mainService)
         {
-            Endscore = score;
+            mainServiceInst = mainService;
+
             InitializeComponent();
-            label_endscore.Text = $"Dein Score ist {Endscore}/10";
+            label_endscore.Text = mainService.DisplayEndScore();
         }
 
         private void Endscreen_Load(object sender, EventArgs e)
@@ -29,8 +31,7 @@ namespace MatheQuiz.Forms
 
         private void Endscreen_FormClosed(object sender, FormClosedEventArgs e)
         {
-            StartMenu startMenu = new StartMenu();
-            startMenu.Show();
+            mainServiceInst.Ini();
         }
     }
 }

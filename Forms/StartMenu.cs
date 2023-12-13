@@ -9,21 +9,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MatheQuiz.Forms;
 using MatheQuiz;
+using MatheQuiz.BackEnd.Services;
 
 namespace MatheQuiz.Forms
 {
     public partial class StartMenu : Form
     {
-        public StartMenu()
+        private MainService mainService;
+
+        public StartMenu(MainService mainService)
         {
+            this.mainService = mainService;
             InitializeComponent();
         }
 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Aufgabe aufgabe = new Aufgabe();
-            aufgabe.Show();
+            mainService.ShowTaskForm();
+        }
+
+        private void StartMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainService.CloseProgram();
         }
     }
 }

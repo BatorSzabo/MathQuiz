@@ -67,6 +67,7 @@ namespace MatheQuiz.Forms
             this.Controls.Add(this.btn_start);
             this.Name = "StartMenu";
             this.Text = "main";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartMenu_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

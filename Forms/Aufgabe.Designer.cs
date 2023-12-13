@@ -1,4 +1,5 @@
-﻿namespace MatheQuiz
+﻿using MatheQuiz;
+namespace MatheQuiz.Forms
 {
     partial class Aufgabe
     {

@@ -14,8 +14,10 @@ using System.Windows.Forms;
 using MatheQuiz.FrontEnd;
 using System.Globalization;
 using System.Threading;
+using MatheQuiz;
+using MatheQuiz.Forms;
 
-namespace MatheQuiz
+namespace MatheQuiz.Forms
 {
     public partial class Aufgabe : Form
     {

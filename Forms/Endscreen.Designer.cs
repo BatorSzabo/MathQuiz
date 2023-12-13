@@ -1,4 +1,5 @@
-﻿namespace MatheQuiz
+﻿using MatheQuiz;
+namespace MatheQuiz.Forms
 {
     partial class Endscreen
     {
@@ -52,6 +53,8 @@
             this.Controls.Add(this.label_endscore);
             this.Name = "Endscreen";
             this.Text = "Endscreen";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Endscreen_FormClosed);
+            this.Load += new System.EventHandler(this.Endscreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

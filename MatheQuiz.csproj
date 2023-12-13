@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Endscreen.cs">
+    <Compile Include="Forms\Endscreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Endscreen.Designer.cs">
+    <Compile Include="Forms\Endscreen.Designer.cs">
       <DependentUpon>Endscreen.cs</DependentUpon>
     </Compile>
     <Compile Include="FrontEnd\DispalyEntities.cs" />
@@ -60,27 +60,27 @@
     <Compile Include="BackEnd\Services\Mathproblems\Mult.cs" />
     <Compile Include="BackEnd\Services\Mathproblems\Sub.cs" />
     <Compile Include="BackEnd\Services\ServiceCheckInput.cs" />
-    <Compile Include="StartMenu.cs">
+    <Compile Include="Forms\StartMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartMenu.Designer.cs">
+    <Compile Include="Forms\StartMenu.Designer.cs">
       <DependentUpon>StartMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Aufgabe.cs">
+    <Compile Include="Forms\Aufgabe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Aufgabe.Designer.cs">
+    <Compile Include="Forms\Aufgabe.Designer.cs">
       <DependentUpon>Aufgabe.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Aufgabe.resx">
+    <EmbeddedResource Include="Forms\Aufgabe.resx">
       <DependentUpon>Aufgabe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Endscreen.resx">
+    <EmbeddedResource Include="Forms\Endscreen.resx">
       <DependentUpon>Endscreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StartMenu.resx">
+    <EmbeddedResource Include="Forms\StartMenu.resx">
       <DependentUpon>StartMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MatheQuiz.Forms;
+using MatheQuiz;
 
-namespace MatheQuiz
+namespace MatheQuiz.Forms
 {
     public partial class StartMenu : Form
     {
-        private MainMenu mainMenu = new MainMenu();
-
         public StartMenu()
         {
             InitializeComponent();
@@ -21,6 +21,7 @@ namespace MatheQuiz
 
         private void btn_start_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Aufgabe aufgabe = new Aufgabe();
             aufgabe.Show();
         }

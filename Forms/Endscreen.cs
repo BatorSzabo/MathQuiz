@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MatheQuiz;
+using MatheQuiz.Forms;
 
-namespace MatheQuiz
+namespace MatheQuiz.Forms
 {
     public partial class Endscreen : Form
     {
@@ -19,6 +21,16 @@ namespace MatheQuiz
             Endscore = score;
             InitializeComponent();
             label_endscore.Text = $"Dein Score ist {Endscore}/10";
+        }
+
+        private void Endscreen_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void Endscreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StartMenu startMenu = new StartMenu();
+            startMenu.Show();
         }
     }
 }
